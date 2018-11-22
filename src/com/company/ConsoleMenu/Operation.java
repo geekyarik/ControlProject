@@ -20,11 +20,7 @@ public class Operation {
     }
 
     public static void scan (Scanner scanner, CarPark park){    //(InputStream stream, CarPark park) {
-        /*showCommands();
-        LOGGER.info("Scanning new command.");
-        String comText = scanner.nextLine();
-        LOGGER.info("Recognizing the command.");
-        execute(comText, scanner, park);*/
+
         String comText;
         do{
             comText = scanner.nextLine();
