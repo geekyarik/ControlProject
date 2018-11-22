@@ -20,14 +20,18 @@ public class Operation {
     }
 
     public static void scan (Scanner scanner, CarPark park){    //(InputStream stream, CarPark park) {
-        showCommands();
+        /*showCommands();
         LOGGER.info("Scanning new command.");
         String comText = scanner.nextLine();
         LOGGER.info("Recognizing the command.");
-        execute(comText, scanner, park);
+        execute(comText, scanner, park);*/
+        String comText;
+        do{
+            comText = scanner.nextLine();
+        }while (execute(comText, scanner, park));
     }
 
-    private static void execute(String comText, Scanner scanner, CarPark park) {//InputStream stream
+    private static boolean execute(String comText, Scanner scanner, CarPark park) {//InputStream stream
         String token = comText.split(" ")[0]; //this.wordsList.get(0);
         try {
             switch (Command.valueOf(token.toUpperCase())) {
@@ -55,11 +59,13 @@ public class Operation {
                     park.sort();
                     break;
                 case CONSOLE:
-                    scanner = new Scanner(System.in);
-                    break;
+                   // scanner = new Scanner(System.in);
+                    scan(new Scanner(System.in), park);
+                    return false;
+                    //break;
                 case EXIT:
                     LOGGER.info("Exit");
-                    return;
+                    return false;
                 default:
                     throw new UnrecogrizedCommandEx("Command is not recognized.");
             }
@@ -69,7 +75,7 @@ public class Operation {
             LOGGER.warn(ex.getMessage());
         }
         LOGGER.info("Command is operated.");
-        scan(scanner, park);
+        return true;//scan(scanner, park);
     }
 
     private static void showCommands() {
