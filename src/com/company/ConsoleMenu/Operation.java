@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Operation {
-    public static Logger LOGGER = Logger.getLogger(Operation.class.getSimpleName());
+    private static Logger LOGGER = Logger.getLogger(Operation.class.getSimpleName());
 
     static {
         String log4jConfPath = "D:\\Projects\\RozrProject\\src\\com\\company\\log4j.properties";
@@ -20,15 +20,6 @@ public class Operation {
     }
 
     public static void scan (Scanner scanner, CarPark park){    //(InputStream stream, CarPark park) {
-
-        /*String comText; //= new Scanner(stream).nextLine();
-        try(DataInputStream d= new DataInputStream(new BufferedInputStream(stream))){
-            comText = d.readUTF();
-            execute(comText, stream, park);
-
-        }catch (IOException ex){
-
-        }*/
         showCommands();
         LOGGER.info("Scanning new command.");
         String comText = scanner.nextLine();
@@ -36,7 +27,7 @@ public class Operation {
         execute(comText, scanner, park);
     }
 
-    public static void execute(String comText, Scanner scanner, CarPark park) {//InputStream stream
+    private static void execute(String comText, Scanner scanner, CarPark park) {//InputStream stream
         String token = comText.split(" ")[0]; //this.wordsList.get(0);
         try {
             switch (Command.valueOf(token.toUpperCase())) {
@@ -81,7 +72,7 @@ public class Operation {
         scan(scanner, park);
     }
 
-    public static void showCommands() {
+    private static void showCommands() {
         LOGGER.info("Displaying commands");
         System.out.println("Available commands:");
         for (Command com : Command.values()) {
@@ -89,7 +80,7 @@ public class Operation {
         }
     }
 
-    public static Car createCar(String comText) throws UnrecogrizedCommandEx {
+    private static Car createCar(String comText) throws UnrecogrizedCommandEx {
         LOGGER.info("Creating new car.");
 
         Car currentCar = new Car();
@@ -125,7 +116,7 @@ public class Operation {
         return currentCar;
     }
 
-    public static int getID(String comText) throws UnrecogrizedCommandEx {
+    private static int getID(String comText) throws UnrecogrizedCommandEx {
         Pattern pattern = Pattern.compile("id=\\d+");
         Matcher matcher = pattern.matcher(comText);
 
@@ -136,7 +127,7 @@ public class Operation {
         }
     }
 
-    public static int beginRange(String comText) throws UnrecogrizedCommandEx {
+    private static int beginRange(String comText) throws UnrecogrizedCommandEx {
         Pattern pattern = Pattern.compile("from=\\d+");
         Matcher matcher = pattern.matcher(comText);
 
@@ -147,7 +138,7 @@ public class Operation {
         }
     }
 
-    public static int endRange(String comText) throws UnrecogrizedCommandEx {
+    private static int endRange(String comText) throws UnrecogrizedCommandEx {
         Pattern pattern = Pattern.compile("to=\\d+");
         Matcher matcher = pattern.matcher(comText);
 
