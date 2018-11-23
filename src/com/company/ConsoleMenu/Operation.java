@@ -7,6 +7,9 @@ import com.company.TaxiPark.InvalidIDEx;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,8 +43,6 @@ public class Operation {
                 case REMOVE:
                     park.remove(getID(comText));
                     break;
-                case CHANGE:
-                    break;
                 case SEARCH:
                     park.showList(park.find(beginRange(comText),endRange(comText)));//park.findAndShow(beginRange(comText), endRange(comText));
                     break;
@@ -59,6 +60,9 @@ public class Operation {
                     scan(new Scanner(System.in), park);
                     return false;
                     //break;
+                case FILE:
+                    scanFromFile(park);
+                    return false;
                 case EXIT:
                     LOGGER.info("Exit");
                     return false;
@@ -86,7 +90,7 @@ public class Operation {
         LOGGER.info("Creating new car.");
 
         Car currentCar = new Car();
-        Pattern pattern = Pattern.compile("speed=\\d+");
+        Pattern pattern = Pattern.compile("speed[=\\s]\\d+");
         Matcher matcher = pattern.matcher(comText);       //add speed=100 type=sedan price=5000 fuel=6.5
 
         if (!matcher.find()) {
@@ -94,21 +98,21 @@ public class Operation {
         }
         currentCar.setCruiserSpeed(Integer.parseInt(matcher.group(0).substring(6)));
 
-        pattern = Pattern.compile("type=\\w+");
+        pattern = Pattern.compile("type[=\\s]\\w+");
         matcher = pattern.matcher(comText);
         if (!matcher.find()) {
             throw new UnrecogrizedCommandEx("No type definition");
         }
         currentCar.setType(CarType.valueOf(matcher.group(0).substring(5).toUpperCase()));
 
-        pattern = Pattern.compile("price=\\d+");
+        pattern = Pattern.compile("price[=\\s]\\d+");
         matcher = pattern.matcher(comText);
         if (!matcher.find()) {
             throw new UnrecogrizedCommandEx("No price definition");
         }
         currentCar.setPrice(Integer.parseInt(matcher.group(0).substring(6)));
 
-        pattern = Pattern.compile("fuel=\\d+.?\\d*");
+        pattern = Pattern.compile("fuel[=\\s]\\d+.?\\d*");
         matcher = pattern.matcher(comText);
         if (!matcher.find()) {
             throw new UnrecogrizedCommandEx("No fuel definition");
@@ -148,6 +152,21 @@ public class Operation {
             return Integer.parseInt(matcher.group(0).substring(3));
         } else {
             throw new UnrecogrizedCommandEx("No value of end of the range");
+        }
+    }
+
+    private static void scanFromFile(CarPark park) throws UnrecogrizedCommandEx{
+
+        Scanner fileScanner;
+
+        try (FileInputStream fileIn = new FileInputStream(
+                new File("D:\\Projects\\RozrProject\\src\\com\\company\\Res\\input.txt"))) {
+            fileScanner = new Scanner(fileIn);
+
+            Operation.scan(fileScanner, park);
+        } catch (IOException ex) {
+            LOGGER.fatal("Can`t open file with input data.");
+            throw new UnrecogrizedCommandEx("Can not open input file");
         }
     }
 }

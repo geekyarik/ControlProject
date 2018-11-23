@@ -10,4 +10,15 @@ add speed=90 type=sedan price=9000 fuel=5.9
 add speed=40 type=suv price=8900 fuel=5.1
 add speed=80 type=hatchback price=6500 fuel=4
 add speed=120 type=roadster price=11000 fuel=8
+add speed=120 type=sedan price=6000 fuel=7.5
+add speed=80 type=roadster price=7000 fuel=2.1
+add speed=60 type=crossover price=1700 fuel=4.9
+add speed=110 type=roadster price=8450 fuel=8
+add speed=40 type=hatchback price=4100 fuel=4.1
+add speed=130 type=crossover price=7500 fuel=6.1
+add speed=180 type=mpv price=3600 fuel=4.5
+add speed=100 type=sedan price=9000 fuel=7
+add speed=60 type=sedan price=8900 fuel=5.3
+add speed=50 type=hatchback price=6500 fuel=8.5
+add speed=130 type=suv price=11000 fuel=5.3
 console

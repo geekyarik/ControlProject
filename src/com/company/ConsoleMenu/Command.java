@@ -4,13 +4,13 @@ public enum Command {
     COMMANDS("commands"),
     ADD("add"),
     REMOVE("remove"),
-    CHANGE("change"),
     SEARCH("search"),
     PRICE("price"),
     LIST("list"),
     SORT("sort"),
     EXIT("exit"),
-    CONSOLE("console");
+    CONSOLE("console"),
+    FILE("file");
 
     final String comText;
 

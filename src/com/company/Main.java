@@ -19,7 +19,10 @@ public class Main {
         LOGGER.info("Starting of the program");
 
         CarPark park = new CarPark();
-        Scanner fileScanner;
+
+        Operation.scan(new Scanner(System.in), park);
+
+        /*Scanner fileScanner;
 
         try (FileInputStream fileIn = new FileInputStream(
                 new File("D:\\Projects\\RozrProject\\src\\com\\company\\Res\\input.txt"))) {
@@ -28,6 +31,6 @@ public class Main {
             Operation.scan(fileScanner, park);
         } catch (IOException ex) {
             LOGGER.fatal("Can`t open file with input data.");
-        }
+        }*/
     }
 }
