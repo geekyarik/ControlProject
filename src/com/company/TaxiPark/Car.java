@@ -23,6 +23,11 @@ public class Car implements Comparable {
         return id;
     }
 
+    public void decId() {
+        this.id--;
+        count--;
+    }
+
     public CarType getType() {
         return type;
     }

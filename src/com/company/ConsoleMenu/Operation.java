@@ -94,6 +94,7 @@ public class Operation {
         Matcher matcher = pattern.matcher(comText);       //add speed=100 type=sedan price=5000 fuel=6.5
 
         if (!matcher.find()) {
+            currentCar.decId();
             throw new UnrecogrizedCommandEx("No speed definition");
         }
         currentCar.setCruiserSpeed(Integer.parseInt(matcher.group(0).substring(6)));
@@ -101,6 +102,7 @@ public class Operation {
         pattern = Pattern.compile("type[=\\s]\\w+");
         matcher = pattern.matcher(comText);
         if (!matcher.find()) {
+            currentCar.decId();
             throw new UnrecogrizedCommandEx("No type definition");
         }
         currentCar.setType(CarType.valueOf(matcher.group(0).substring(5).toUpperCase()));
@@ -108,6 +110,7 @@ public class Operation {
         pattern = Pattern.compile("price[=\\s]\\d+");
         matcher = pattern.matcher(comText);
         if (!matcher.find()) {
+            currentCar.decId();
             throw new UnrecogrizedCommandEx("No price definition");
         }
         currentCar.setPrice(Integer.parseInt(matcher.group(0).substring(6)));
@@ -115,6 +118,7 @@ public class Operation {
         pattern = Pattern.compile("fuel[=\\s]\\d+.?\\d*");
         matcher = pattern.matcher(comText);
         if (!matcher.find()) {
+            currentCar.decId();
             throw new UnrecogrizedCommandEx("No fuel definition");
         }
         currentCar.setFuelConsumption(Double.parseDouble(matcher.group(0).substring(5)));

@@ -20,7 +20,7 @@ public class Main {
 
         CarPark park = new CarPark();
 
-        Operation.scan(new Scanner(System.in), park);
+        Operation.scan(new Scanner(System.in), park);   //BiFunction
 
         /*Scanner fileScanner;
 
